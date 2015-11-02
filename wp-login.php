@@ -923,6 +923,7 @@ default:
 	 *
 	 * @since 2.1.0
 	 */
+	echo 'login_form in wp-login.php';
 	do_action( 'login_form' );
 	?>
 	<p class="forgetmenot"><label for="rememberme"><input name="rememberme" type="checkbox" id="rememberme" value="forever" <?php checked( $rememberme ); ?> /> <?php esc_attr_e('Remember Me'); ?></label></p>

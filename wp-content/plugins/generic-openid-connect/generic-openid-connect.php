@@ -150,14 +150,6 @@ class GenericOpenIDConnect {
 		exit;
 	}
 
-	private function error_redirect_more_info($errno,$user_claim, $authed_username='') {
-		$url = wp_login_url() . '?plugin-error=' . $errno .http_build_query($user_claim) . "\n";
-		if ( $authed_username != '' ) {
-			$url .= '&authed_username=' . $authed_username;
-		}
-		wp_redirect( $url );
-		exit;
-	}
 	/**
 	 * logout method - called from wp_logout action
 	 *
@@ -255,7 +247,7 @@ class GenericOpenIDConnect {
 	 * @return void
 	 */
 	public function login_form() {
-
+		echo "login_form in generic_openid_connect.php";
 		if ( isset( $_GET['plugin-error'] ) ) {
 			echo $this->styled_error_message( $_GET['plugin-error'] );
 		} elseif ( $this->use_autologin && !isset( $_GET['loggedout'] ) ){
@@ -266,12 +258,6 @@ class GenericOpenIDConnect {
 
 	private function styled_error_message($errno) {
 		$message = self::$ERR_MES[$errno];
-		return '<div style="padding:10px;background-color:#FFDFDD;border:1px solid #ced9ea;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;"><p style="line-height:1.6em;"><strong>Error!</strong>&nbsp;' . $message . '</p></div><br>';
-	}
-
-	private function styled_error_message_more_info($errno,$user_claim) {
-		$message = self::$ERR_MES[$errno];
-		$message .= $user_claim;
 		return '<div style="padding:10px;background-color:#FFDFDD;border:1px solid #ced9ea;border-radius:3px;-webkit-border-radius:3px;-moz-border-radius:3px;"><p style="line-height:1.6em;"><strong>Error!</strong>&nbsp;' . $message . '</p></div><br>';
 	}
 
